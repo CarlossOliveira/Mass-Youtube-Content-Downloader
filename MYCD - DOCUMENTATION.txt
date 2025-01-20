@@ -1,0 +1,124 @@
+Mass YouTube Content Downloader (MYCD) is an automation script created by Carlos Oliveira (GitHub: @CarlossOliveira) based on yt-dlp.
+This script is designed to automate the process of downloading large quantities of content from YouTube.
+This documentation provides a brief explanation of all the program's features and parameters.
+If you have any questions or issues, please contact the script's developer.
+
+
+
+=> CONFIGURATION FILE EXPECTED FORMAT (MYCD - CONFIGURATION.txt):
+== GENERAL CONFIGURATION ==
+operation_mode: [search/link]
+output_format: [mp3/m4a/opus/aac/flac/wav/mp4/best_video_quality]
+number_of_search_queries: [1/(...)] (Optional if operation_mode = link)
+search_matching: [MATCH1|MATCH2|MATCH3|(...)] (Optional)
+words_to_reject_during_search: [FILTER1|FILTER2|FILTER3|(...)] (Optional)
+
+== PATH CONFIGURATION ==
+output_folder_path: [PATH_TO_YOUR_DESIRED_OUTPUT_FOLDER] (Optional)
+
+yt_dlp_path: [PATH_TO_YT-DLP.EXE] (Optional if you have the "PROGRAM FILES" folder installed with your script)
+ffmpeg_path: [PATH_TO_FFMPEG.EXE] (Optional if you have the "PROGRAM FILES" folder installed with your script)
+
+
+
+=> EXAMPLE CONFIGURATION (MYCD - CONFIGURATION.txt):
+== GENERAL CONFIGURATION ==
+operation_mode: search
+output_format: mp3
+number_of_search_queries: 15
+search_matching: audio oficial|Official Audio|letra|lyrics|Official soundtrack
+words_to_reject_during_search: cover|live|Videoclip|remix|Acoustic version
+
+== PATH CONFIGURATION ==
+output_folder_path: 
+
+yt_dlp_path: 
+ffmpeg_path: C:\Users\Carlos\Downloads\ffmpeg\ffmpeg.exe
+
+
+
+=> USER MANUAL AND IMPORTANT NOTES:
+1- Both the search_matching and words_to_reject_during_search fields are optional filters. If you leave one or both 
+   blank, the program will run without any problems but won't filter the YouTube search.
+2- The number_of_search_queries field tells the program to check the first x entries of a search and decide which one to 
+   choose. If you want to use filters, such as search_matching and words_to_reject_during_search, you will likely benefit 
+   from selecting a wider range of search results. However, if you don't use filters, 1 or 2 entries might suffice.If you 
+   are using the search mode, it is mandatory to specify at least 1 entry for the program to work.
+3- All fields except search_matching and words_to_reject_during_search are mandatory. If you leave one blank, the program 
+   won't run or will malfunction.
+4- Both yt-dlp and ffmpeg need to be installed. By default, the folder containing this program will also have a sub-folder 
+   called "Program Files". This folder contains a Windows version of yt-dlp and ffmpeg. The program will use those executables 
+   by default. If you prefer to use your own paths, specify them below in the "PATH CONFIGURATION" section in their designated 
+   fields. If you don't wish to use your own versions, leave those fields empty so the program will use the default executables.
+5- The input file must be a .txt file for the program to work. The input files require a specific format for the program to 
+   read them.
+6- If you are using the search mode, your input text file should look like example (1).
+7- If you are using the link mode, your input text file should look like example (2).
+8- The character § should only be used to specify the duration of a search. It should not be used for any other purpose.
+9- The §[EXPECTED_VIDEO_DURATION]§ field is OPTIONAL. If you specify the intended duration of the video/music to download, 
+   the program will apply a filter to the search, selecting only matches that are of equal or shorter duration. If you don't 
+   wish to use this filter, simply omit it. The duration format should follow the following structure: §[MINUTES:SECONDS]§
+10- The best_video_quality format is an option to output the best video quality possible. The format may vary from video to video, 
+    but choosing this option will always ensure the best resolution and sound available.
+11- The filters in the search_matching and words_to_reject_during_search fields should be separated by a "|" to be applied correctly.
+12- Under the "PATH CONFIGURATION," you can find a field called output_folder_path. This field is reserved for specifying where you 
+    want to store the output folder of the program (MD - MASS DOWNLOADER (Output Folder)). If you want to use this feature, you should 
+    indicate your desired path. If you don't want to use this feature, leave it blank, and the program will create the folder in the 
+    directory where it is being executed.
+13- The only fields that can be used in the program if the operation mode is set to link are: operation_mode, output_format, 
+    output_folder_path, yt_dlp_path and ffmpeg_path. 
+14- If you are using the link mode, the program will automatically verify if between the links there are any that are from a playlist 
+    and will download them using other methods of download. The title of each video downloaded via this mode will temporarily be of the 
+    following format: [PLAYLIST_INDEX_NUMBER] TITLE.FILE_FORMAT
+15- If a playlist is detected, following the download of all its tracks, the program will prompt you to verify and identify any missing 
+    tracks or errors.
+16- Some cookie or identity verification errors may occur during the download process. It is recommended that tracks which could not be 
+    downloaded due to these errors are manually downloaded using the yt-dlp program. However, under the Configuration and User Input 
+    section in the script code, there are two options you can tweak to possibly enable the script to download those tracks. For more 
+    information about this issue, you should refer to the yt-dlp documentation or contact the program developer.
+17- If you start experiencing multiple HTTP errors with the code 403, or errors containing the message "Access Denied," your computer 
+    may have been flagged by YouTube servers due to a high download rate. This action will prevent you from downloading content from 
+    YouTube for a certain period of time. To avoid this from happening, you can toggle the variable named boat_uncovered from False 
+    to True to enable privacy-enhancing mechanisms that may help address the issue. However, while this option may resolve the problem, 
+    enabling it will decrease the download rate, significantly affecting the script's performance. It is recommended to use a VPN or a 
+    proxy every time you run this script to avoid receiving an IP ban from YouTube.
+
+For more information or to report any bugs, feel free to contact the developer and/or reach out to yt-dlp support on GitHub.
+
+
+
+=> INPUT FILE FORMAT FOR OPERATION MODE - SEARCH (1):
+[TITLE_OF_THE_VIDEO1] - [AUTHOR1] §[EXPECTED_VIDEO_DURATION]§
+[TITLE_OF_THE_VIDEO2] - [AUTHOR2] 
+[TITLE_OF_THE_VIDEO3] - [AUTHOR3] §[EXPECTED_VIDEO_DURATION]§
+[TITLE_OF_THE_VIDEO4] - [AUTHOR4] 
+[TITLE_OF_THE_VIDEO5] - [AUTHOR5] §[EXPECTED_VIDEO_DURATION]§
+(...)                            
+
+
+
+=> EXAMPLE OF AN INPUT FILE FOR OPERATION MODE - SEARCH (1):
+Paradise - Coldplay
+Or Nah (feat. The Weeknd, Wiz Khalifa & DJ Mustard) - Remix - Ty Dolla $ign
+Diamonds - Rihanna §3:45§
+Timeless (with Playboi Carti) - The Weeknd §4:16§
+TORE UP - Don Toliver §2:06§
+
+
+
+=> INPUT FILE FORMAT FOR OPERATION MODE - LINK (2):
+[LINK_TO_THE_YOUTUBE_VIDEO1]
+[LINK_TO_THE_YOUTUBE_VIDEO2]
+[LINK_TO_THE_YOUTUBE_VIDEO3]
+[LINK_TO_THE_YOUTUBE_PLAYLIST1]
+[LINK_TO_THE_YOUTUBE_PLAYLIST2]
+(...)
+
+
+
+=> EXAMPLE OF AN INPUT FILE FOR OPERATION MODE - LINK (2):
+https://www.youtube.com/watch?v=1G4isv_Fylg
+https://www.youtube.com/watch?v=TUj0otkJEBo
+https://www.youtube.com/watch?v=lWA2pjMjpBs
+https://www.youtube.com/watch?v=5EpyN_6dqyk
+https://www.youtube.com/watch?v=JxwaaLpP4ss

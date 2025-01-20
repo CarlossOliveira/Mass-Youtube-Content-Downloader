@@ -1,0 +1,13 @@
+== GENERAL CONFIGURATION ==
+operation_mode: 
+output_format: 
+
+number_of_searched_queries: 
+search_matching: 
+words_to_reject_during_search:    
+
+== PATH CONFIGURATION ==
+output_folder_path:
+
+yt_dlp_path: 
+ffmpeg_path: 
